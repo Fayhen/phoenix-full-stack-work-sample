@@ -185,7 +185,22 @@ defmodule Fly.Client do
             slug
           }
           deployed
+          version
           status
+          currentRelease {
+            createdAt
+            updatedAt
+            stable
+            status
+            version
+          }
+          vmSize {
+            name
+            cpuCores
+            memoryGb
+            memoryMb
+            priceMonth
+          }
           processGroups {
             name
             regions
@@ -194,6 +209,7 @@ defmodule Fly.Client do
               name
               cpuCores
               memoryMb
+              priceMonth
             }
           }
           releases(last: 5) {

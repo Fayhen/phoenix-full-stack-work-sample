@@ -4,6 +4,8 @@ defmodule Fly.Utils do
   @doc """
   Generates a random binary value.
   """
+  require Logger
+
   @spec random_value() :: binary()
   def random_value() do
     :crypto.strong_rand_bytes(20) |> Base.encode32(case: :lower)
@@ -24,5 +26,16 @@ defmodule Fly.Utils do
   """
   def stringify(data) do
     Recase.Enumerable.stringify_keys(data)
+  end
+
+  @doc """
+  Converts a ISO 8601 date string to a human readable format.
+  """
+  def readable_date(iso_8601_string) do
+    Logger.info("Called parse_date()")
+    Logger.info(iso_8601_string)
+    {:ok, datetime, 0} = DateTime.from_iso8601(iso_8601_string)
+    Logger.info("#{datetime.month}-#{datetime.day}-#{datetime.year} #{datetime.hour}:#{datetime.minute}")
+    "#{datetime.month}-#{datetime.day}-#{datetime.year} #{datetime.hour}:#{datetime.minute}"
   end
 end

@@ -1,5 +1,6 @@
 <div>
   <div class="bg-gray-800 pb-32">
+
     <nav class="bg-gray-800">
       <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="border-b border-gray-700">
@@ -27,15 +28,29 @@
         </div>
       </div>
     </nav>
+
     <header class="py-10">
       <div class="max-w-3xl mx-auto px-4 sm:px-6 md:flex md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8">
           <div class="flex-1 min-w-0">
+            
+            <!-- App name -->
             <h2 class="text-2xl font-bold leading-7 text-white-900 sm:text-3xl sm:truncate">
               <%= @app_name %>
-              <p class={"px-2 mx-4 inline-flex text-xs leading-5 font-semibold rounded-full #{status_bg_color(@app)} #{status_text_color(@app)}"}>
-                <%= @app["status"] %>
-              </p>
+
+              <%= if @app do %>
+                <!-- App version -->
+                <p class={"px-2 ml-4 inline-flex text-xs leading-5 font-semibold rounded-full #{status_bg_color(@app)} #{status_text_color(@app)}"}>
+                  v<%= @app["version"] %>
+                </p>
+
+                <!-- Deployment status -->
+                <p class={"px-2 mx-4 inline-flex text-xs leading-5 font-semibold rounded-full #{status_bg_color(@app)} #{status_text_color(@app)}"}>
+                  <%= @app["status"] %>
+                </p>
+              <% end %>
             </h2>
+
+            <!-- App's organization -->
             <div class="mt-1 flex flex-col sm:flex-row sm:flex-wrap sm:mt-0 sm:space-x-6">
               <div class="mt-2 flex items-center text-sm text-gray-500">
                 <%= @app["organization"]["slug"] %>
@@ -47,6 +62,8 @@
               </div>
             </div>
           </div>
+
+          <!-- View button, rendered when the app is deployed -->
           <div class="mt-5 flex lg:mt-0 lg:ml-4">
             <%= if @app["deployed"] == true do %>
               <span class="hidden sm:block ml-3">
@@ -60,14 +77,122 @@
               </span>
             <% end %>
           </div>
+
       </div>
     </header>
+
   </div>
 
   <%= if @app do %>
     <main class="-mt-32">
+
+      <!-- Outer wrapper -->
       <div class="max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
+
+        <!-- General info wrapper -->
         <div class="space-y-6 lg:col-start-1 lg:col-span-2">
+          <section>
+            <div class="bg-white shadow sm:rounded-lg">
+              <div class="px-4 py-5 sm:px-6">
+                <h2 class="text-lg leading-6 font-medium text-gray-900">
+                  General
+                </h2>
+              </div>
+
+              <div class="column space-y-6 px-4 sm:px-6">
+                <div class="grid grid-cols-3 text-black">
+                  <div>
+                    Current version
+                  </div>  
+                  <div>
+                    Status
+                  </div>
+                  <div>
+                    Last updated
+                  </div>
+                </div>
+                <div class="grid grid-cols-3 items-center">
+                  <div>
+                    <p>
+                      v<%= @app["currentRelease"]["version"] %>
+                    </p>
+                  </div>
+                  <div class="flex flex-row items-center">
+                    <%= if @app["currentRelease"]["stable"] do %>
+                      <p class="text-green-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                      </p>
+                    <% else %>
+                      <p class="text-red-800">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                        </svg>
+                      </p>
+                    <% end %>
+                    <p>
+                      <%= @app["currentRelease"]["status"] %>
+                    </p>
+                  </div>
+                  <div>
+                    <p>
+                      <%= Fly.Utils.readable_date(@app["currentRelease"]["updatedAt"]) %>
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Hardware usage details -->
+              <div class="flex flex-row justify-between items-center bg-gray-50 hover:bg-gray-100 text-black cursor-pointer h-10 my-4 px-4 sm:px-6" phx-click="toggle_show_hardware">
+                <h3>Hardware usage</h3>
+                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
+              </div>
+              <div class={"flex flex-col space-y-6 mt-sm px-4 sm:px-6 #{@show_hardware}"}>
+                <div class="grid grid-cols-5 text-black">
+                  <div>
+                    Name
+                  </div>
+                  <div>
+                    CPU Cores
+                  </div>
+                  <div>
+                    Memory (MB)
+                  </div>
+                  <div>
+                    Memory (GB)
+                  </div>
+                  <div>
+                    Pricing (month)
+                  </div>
+                </div>
+                
+                <div class="grid grid-cols-5">
+                  <div>
+                    <%= @app["vmSize"]["name"] %>
+                  </div>
+                  <div>
+                    <%= @app["vmSize"]["cpuCores"] %>
+                  </div>
+                  <div>
+                    <%= @app["vmSize"]["memoryMb"] %>
+                  </div>
+                  <div>
+                    <%= @app["vmSize"]["memoryGb"] %>
+                  </div>
+                  <div>
+                    US$ <%= @app["vmSize"]["priceMonth"] %>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </section>
+        </div>
+
+        <!-- Processes groups wrapper -->
+        <div class="space-y-6 lg:col-start-1 lg:col-span-2">
+          
           <!-- Description list-->
           <section>
             <div class="bg-white shadow sm:rounded-lg">
@@ -124,7 +249,8 @@
           </section>
         </div>
 
-        <section aria-labelledby="timeline-title" class="lg:col-start-3 lg:col-span-1">
+        <!-- Timeline wrapper -->
+        <section aria-labelledby="timeline-title" class="lg:col-start-3 lg:col-span-1" style="border: 2px solid green;">
           <div class="bg-white px-4 py-5 shadow sm:rounded-lg sm:px-6">
             <h2 id="timeline-title" class="text-lg font-medium text-gray-900">Timeline</h2>
 
@@ -168,7 +294,7 @@
                             <p class="text-sm text-gray-500"><%= release["reason"] %></p>
                           </div>
                           <div class="text-right text-sm whitespace-nowrap text-gray-500">
-                            <time datetime="2020-09-20"><%= release["createdAt"] %></time>
+                            <time datetime="2020-09-20"><%= Fly.Utils.readable_date(release["createdAt"]) %></time>
                           </div>
                         </div>
                       </div>
@@ -179,6 +305,97 @@
             </div>
           </div>
         </section>
+
+        <!-- All data -->
+        <div class="space-y-6 lg:col-start-1 lg:col-span-2" style="border: 2px solid brown;">
+
+          <!-- Name -->
+          <div class="mt-2 flex items-center text-sm text-gray-500">
+            <strong>Name</strong>: <%= @app["name"] %>
+          </div>
+
+          <!-- ID -->
+          <div class="mt-2 flex items-center text-sm text-gray-500">
+            <strong>ID</strong>: <%= @app["id"] %>
+          </div>
+
+          <!-- Organization > ID -->
+          <div class="mt-2 flex items-center text-sm text-gray-500">
+            <strong>Organization -> ID:</strong>: <%= @app["organization"]["id"] %>
+          </div>
+
+          <!-- Organization > slug -->
+          <div class="mt-2 flex items-center text-sm text-gray-500">
+            <strong>Organization -> slug</strong>: <%= @app["organization"]["slug"] %>
+          </div>
+
+          <!-- Deployed -->
+          <div class="mt-2 flex items-center text-sm text-gray-500">
+            <strong>Deployed</strong>: <%= @app["deployed"] %>
+          </div>
+
+          <!-- Status -->
+          <div class="mt-2 flex items-center text-sm text-gray-500">
+            <strong>Status</strong>: <%= @app["status"] %>
+          </div>
+
+          <!-- processGroups -->
+          <div class="mt-2 flex items-center text-sm text-gray-500">
+            <strong>processGroups</strong>:
+          </div>
+          <div class="mt-2 flex items-center text-sm text-gray-500">
+            <table>
+              <tbody>
+                <%= for pg <- @app["processGroups"] do %>
+                  <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <%= pg["name"] %>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <%= pg["regions"] %>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <%= pg["maxPerRegion"] %>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <%= pg["vmSize"]["name"] %>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <%= pg["vmSize"]["cpuCores"] %>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <%= pg["vmSize"]["memoryMb"] %>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Releases totalCount -->
+          <div class="mt-2 flex items-center text-sm text-gray-500">
+            <strong>Releases totalCount</strong>: <%= @app["releases"]["totalCount"] %>
+          </div>
+
+          <!-- Release nodes -->
+          <div class="mt-2 flex-col text-sm text-gray-500">
+            <strong>Releases nodes:</strong>
+          </div>
+          <div class="pl-2 flex flex-col text-sm text-gray-500">
+            <%= for release <- @app["releases"]["nodes"] do %>
+              <p><strong>version</strong>: <%= release["version"] %></p>
+              <p><strong>stable</strong>: <%= release["stable"] %></p>
+              <p><strong>description</strong>: <%= release["description"] %></p>
+              <p><strong>reason</strong>: <%= release["reason"] %></p>
+              <p><strong>createdAt</strong>: <%= release["createdAt"] %></p>
+              <p><strong>user name</strong>: <%= release["user"]["name"] %></p>
+              <p class="mb-2">
+                <strong>user avatar</strong>: <%= release["user"]["avatarUrl"] %>
+              </p>
+            <% end %>
+
+          </div>
+        </div>
       </div>
     </main>
   <% end %>
