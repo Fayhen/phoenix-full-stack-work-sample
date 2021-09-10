@@ -1,0 +1,39 @@
+<section aria-labelledby="regions-title">
+  <div class="px-4 pt-5 sm:px-6">
+    <h2 id="general-info-title" class="text-lg leading-6 font-medium text-gray-900">
+      Regions
+    </h2>
+
+    <div class="mt-6 px-4 sm:px-6 flow-root">
+      <h3 class="text-gray-900">
+        Currently serving
+      </h3>
+      <ul role="list" class="mt-3 space-y-6">
+        <%= for region <- @regions do %>
+          <li class="hover:shadow hover:bg-gray-50 p-4 rounded-md">
+            <span class="px-2 mr-4 inline-flex text-xs leading-5 font-semibold align-middle rounded-full bg-green-100">
+                <%= region["code"] %>
+              </p>
+            </span>
+            <%= region["name"] %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div class="flex flex-row justify-between items-center bg-gray-50 hover:bg-gray-100 text-gray-900 cursor-pointer rounded-lg h-10 my-4 px-4 sm:px-6" phx-click="toggle_show_backup_regions" phx-target="<%= @myself %>">
+      <h3>Show backup regions</h3>
+      <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
+    </div>
+
+    <div class="<%= @show_backup_regions %> pb-4 flow-root">
+      <ul role="list" class="space-y-3 px-4 sm:px-6">
+        <%= for bRegion <- @backup_regions do %>
+          <li class="hover:shadow hover:bg-gray-50 p-4 rounded-md">
+            <%= bRegion["name"] %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</section>

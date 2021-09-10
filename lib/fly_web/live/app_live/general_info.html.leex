@@ -1,12 +1,10 @@
 <section aria-labelledby="general-info-title">
-  <div class="bg-white shadow sm:rounded-lg">
-    <div class="px-4 py-5 sm:px-6">
-      <h2 id="general-info-title" class="text-lg leading-6 font-medium text-gray-900">
-        General
-      </h2>
-    </div>
+  <div class="px-4 pt-5 sm:px-6">
+    <h2 id="general-info-title" class="text-lg leading-6 font-medium text-gray-900">
+      General
+    </h2>
 
-    <div class="column space-y-6 px-4 sm:px-6">
+    <div class="column space-y-6 my-4 px-4 sm:px-6">
       <div class="grid grid-cols-3 text-black">
         <div>
           Current version
@@ -51,11 +49,11 @@
     </div>
 
     <!-- Hardware usage details -->
-    <div class="flex flex-row justify-between items-center bg-gray-50 hover:bg-gray-100 text-black cursor-pointer h-10 my-4 px-4 sm:px-6" phx-click="toggles_show_hardware" phx-target="<%= @myself %>">
+    <div class="flex flex-row justify-between items-center bg-gray-50 hover:bg-gray-100 text-black cursor-pointer rounded-lg h-10 my-4 px-4 sm:px-6" phx-click="toggle_show_hardware" phx-target="<%= @myself %>">
       <h3>Hardware usage</h3>
       <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
     </div>
-    <div class="<%= @show_hardware %> space-y-6 mt-sm px-4 sm:px-6">
+    <div class="<%= @show_hardware %> space-y-6 mt-4 pb-4 px-4 sm:px-6">
       <div class="grid grid-cols-5 text-black">
         <div>
           Name

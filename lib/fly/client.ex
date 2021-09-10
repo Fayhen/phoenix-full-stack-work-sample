@@ -201,6 +201,14 @@ defmodule Fly.Client do
             memoryMb
             priceMonth
           }
+          regions {
+            code
+            name
+            gatewayAvailable
+          }
+          backupRegions {
+            name
+          }
           processGroups {
             name
             regions

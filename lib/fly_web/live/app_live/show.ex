@@ -15,7 +15,8 @@ defmodule FlyWeb.AppLive.Show do
         app_name: name,
         count: 0,
         authenticated: true,
-        show_hardware: "hidden"
+        show_hardware: "hidden",
+        show_backup_regions: "hidden"
       )
 
     # Only make the API call if the websocket is setup. Not on initial render.
@@ -55,6 +56,11 @@ defmodule FlyWeb.AppLive.Show do
   @impl true
   def handle_info({:toggle_show_hardware, updated}, socket) do
     {:noreply, assign(socket, :show_hardware, updated)}
+  end
+
+  @impl true
+  def handle_info({:toggle_show_backup_regions, updated}, socket) do
+    {:noreply, assign(socket, :show_backup_regions, updated)}
   end
 
   def status_bg_color(app) do
