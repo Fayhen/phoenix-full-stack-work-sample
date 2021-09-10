@@ -53,12 +53,7 @@ defmodule FlyWeb.AppLive.Show do
   end
 
   @impl true
-  def handle_event("toggle_show_hardware", _params, socket) do
-    updated = if socket.assigns.show_hardware == "hidden" do
-      "visible"
-    else
-      "hidden"
-    end
+  def handle_info({:toggle_show_hardware, updated}, socket) do
     {:noreply, assign(socket, :show_hardware, updated)}
   end
 
