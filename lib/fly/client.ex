@@ -220,6 +220,14 @@ defmodule Fly.Client do
               priceMonth
             }
           }
+          ipAddresses {
+            nodes {
+              address
+              region
+              type
+              region
+            }
+          }
           releases(last: 5) {
             totalCount
             nodes {
