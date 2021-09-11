@@ -22,11 +22,13 @@
     </div>
 
     <div class="flex flex-row justify-between items-center bg-gray-50 hover:bg-gray-100 text-gray-900 cursor-pointer rounded-lg h-10 my-4 px-4 sm:px-6" phx-click="toggle_show_backup_regions" phx-target="<%= @myself %>">
-      <h3>Show backup regions</h3>
-      <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
+      <h3>Backup regions</h3>
+      <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+      </svg>
     </div>
 
-    <div class="<%= @show_backup_regions %> pb-4 flow-root">
+    <div class="<%= @show_backup_regions %> pb-4">
       <ul role="list" class="space-y-3 px-4 sm:px-6">
         <%= for bRegion <- @backup_regions do %>
           <li class="hover:shadow hover:bg-gray-50 p-4 rounded-md">
