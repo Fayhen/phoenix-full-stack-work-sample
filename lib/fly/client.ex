@@ -228,6 +228,13 @@ defmodule Fly.Client do
               region
             }
           }
+          services {
+            description
+            internalPort
+            hardConcurrency
+            softConcurrency
+            protocol
+          }
           releases(last: 5) {
             totalCount
             nodes {

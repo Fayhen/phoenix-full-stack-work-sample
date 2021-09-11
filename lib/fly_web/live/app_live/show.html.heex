@@ -94,6 +94,11 @@
           <%= live_component(FlyWeb.AppLive.GeneralInfo, id: :general, current_release: @app["currentRelease"], vm_size: @app["vmSize"],  show_hardware: @show_hardware ) %>
         </div>
 
+        <!-- Services wrapper -->
+        <div class="bg-white shadow lg:col-start-1 lg:col-span-2 sm:rounded-lg">
+          <%= live_component(FlyWeb.AppLive.Services, id: :services, services: @app["services"]) %>
+        </div>
+
         <!-- Processes groups wrapper -->
         <div class="bg-white shadow lg:col-start-1 lg:col-span-2 sm:rounded-lg">
           <%= live_component(FlyWeb.AppLive.ProcessGroups, id: :process_groups, process_groups: @app["processGroups"]) %>  

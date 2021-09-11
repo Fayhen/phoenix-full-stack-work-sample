@@ -1,0 +1,74 @@
+<section aria-labelledby="services-title">
+  <div class="px-4 pt-5 sm:px-6">
+    <h2 id="services-title" class="text-lg leading-6 font-medium text-gray-900">
+      Services
+    </h2>
+
+    <div class="my-4 px-4 sm:px-6 text-center">
+      <div class="grid grid-cols-4 items-center font-medium text-gray-800">
+        <div class="text-sm">
+          Description
+        </div>
+        <div class="text-sm">
+          Internal port
+        </div>
+        <div class="text-sm">
+          Protocol
+        </div>
+        <div class="text-sm">
+          Concurrency (soft/hard)
+        </div>
+      </div>
+
+      <%= for service <- @services do %>
+        <div class="grid grid-cols-4 items-center">
+          <div class="text-sm">
+            <%= service["description"] %>
+          </div>
+          <div>
+            <%= service["internalPort"] %>
+          </div>
+          <div>
+            <%= service["protocol"] %>
+          </div>
+          <div class="flex justify-center">
+            <span class="px-2 mx-1 inline-flex text-xs leading-5 font-semibold align-middle rounded-full bg-green-100">
+              <%= service["softConcurrency"] %>
+            </span>
+            <span class="px-2 mx-1 inline-flex text-xs leading-5 font-semibold align-middle rounded-full bg-red-100">
+              <%= service["hardConcurrency"] %>
+            </span>
+          </div>
+        </div>
+
+        <%# <div class="border-b border-l border-r mt-2 pb-2">
+          <div class="grid grid-cols-1 items-center text-sm font-medium text-gray-800 h-8 bg-gray-50">
+            Detailed ports
+          </div>
+          <div class="grid grid-cols-2 items-center">
+            <div class="text-sm font-medium text-gray-800">
+              Port
+            </div>
+            <div class="text-sm font-medium text-gray-800">
+              Handlers
+            </div>
+
+            <%= for port <- service["ports"] do %>
+              <%# <div>
+                <%= port["port"] %>
+              <%# </div>
+
+              <div class="flex justify-center">
+                <%= for handler <- port["handlers"] do %>
+                  <%# <span class="px-2 mx-2 inline-flex text-xs leading-5 font-semibold align-middle rounded-full bg-gray-100">
+                    <%= handler %>
+                  <%# </span>
+                <% end %>
+              <%# </div>
+            <% end %>
+          <%# </div>
+        </div> %>
+      <% end %>
+
+  </div>
+</section>
