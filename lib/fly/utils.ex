@@ -5,6 +5,7 @@ defmodule Fly.Utils do
   Generates a random binary value.
   """
   require Logger
+  require HTTPoison
 
   @spec random_value() :: binary()
   def random_value() do
@@ -32,7 +33,36 @@ defmodule Fly.Utils do
   Converts a ISO 8601 date string to a human readable format.
   """
   def readable_date(iso_8601_string) do
-    {:ok, datetime, 0} = DateTime.from_iso8601(iso_8601_string)
-    "#{datetime.month}-#{datetime.day}-#{datetime.year} #{datetime.hour}:#{datetime.minute}"
+    # {:ok, datetime, 0} = DateTime.from_iso8601(iso_8601_string)
+    # "#{DateTime.to_date(datetime)}, #{Time.truncate(DateTime.to_time(datetime), :second)}"
+
+    DateTime.from_iso8601(iso_8601_string)
+      |> case do
+      {:ok, datetime, 0}  ->
+        "#{DateTime.to_date(datetime)}, #{Time.truncate(DateTime.to_time(datetime), :second)}"
+
+      {:error, :invalid_format} ->
+        "Not available"
+      other ->
+
+        Logger.error("Unexpected result parsing ISO 9601 DateTime string. Result: #{inspect(other)}")
+    end
+  end
+
+  def verify_response_status_code(url) do
+    try do
+      HTTPoison.get(url, [], [])
+        |> handle_image_response()
+    rescue
+      CaseClauseError -> "Error while requesting image URL."
+    end
+  end
+
+  def handle_image_response({:ok, response}) do
+    response.status_code
+  end
+
+  def handle_image_response({:error, _response}) do
+    nil
   end
 end

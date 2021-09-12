@@ -16,4 +16,9 @@ defmodule FlyWeb.AppLive.Timeline do
   defp client_config(session) do
     Fly.Client.config(access_token: session["auth_token"] || System.get_env("FLYIO_ACCESS_TOKEN"))
   end
+
+  def get_image_status(image_src) do
+    status = Fly.Utils.verify_response_status_code(image_src)
+    status in [200, 304]
+  end
 end

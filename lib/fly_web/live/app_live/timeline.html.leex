@@ -16,8 +16,8 @@
                   <!-- User avatar -->
                   <div class="flex items-center">
                     <span class="h-8 w-8 flex items-center justify-center bg-gray-400 ring-8 ring-white rounded-full">
-                      <%= if not is_nil(release["user"]) do %>
-                        <img class="h-8 w-8 inline-block rounded-full" src={release["user"]["avatarUrl"]} alt="">
+                      <%= if not is_nil(release["user"]) and get_image_status(release["user"]["avatarUrl"]) do %>
+                        <img class="h-8 w-8 inline-block rounded-full" src="<%= release["user"]["avatarUrl"] %>" alt="">
                       <% else %>
                         <!-- Heroicon name: solid/user -->
                         <svg class="w-5 h-5 text-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
