@@ -104,6 +104,11 @@
           <%= live_component(FlyWeb.AppLive.ProcessGroups, id: :process_groups, process_groups: @app["processGroups"]) %>  
         </div>
 
+        <!-- Timeline wrapper -->
+        <div class="bg-white shadow lg:col-start-1 lg:col-span-2 sm:rounded-lg">
+          <%= live_component(FlyWeb.AppLive.Timeline, id: :timeline, releases: @app["releases"]["nodes"]) %>
+        </div>
+
         <!-- Regions wrapper -->
         <div class="bg-white shadow lg:col-start-3 lg:col-span-1 sm:rounded-lg">
           <%= live_component(FlyWeb.AppLive.Regions, id: :regions, regions: @app["regions"], backup_regions: @app["backupRegions"], show_backup_regions: @show_backup_regions) %>
@@ -114,10 +119,11 @@
           <%= live_component(FlyWeb.AppLive.IpAdresses, id: :ips, ip_addresses: @app["ipAddresses"]["nodes"]) %>
         </div>
 
-        <!-- Timeline wrapper -->
+        <!-- Autoscaling wrapper -->
         <div class="bg-white shadow lg:col-start-3 lg:col-span-1 sm:rounded-lg">
-          <%= live_component(FlyWeb.AppLive.Timeline, id: :timeline, releases: @app["releases"]["nodes"]) %>
+          <%= live_component(FlyWeb.AppLive.Autoscaling, id: :autoscaling, autoscaling: @app["autoscaling"], show_region_scaling: @show_region_scaling) %>
         </div>
+        
       </div>
     </main>
   <% end %>

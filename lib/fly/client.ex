@@ -235,6 +235,18 @@ defmodule Fly.Client do
             softConcurrency
             protocol
           }
+          autoscaling {
+            enabled
+            strategy
+            balanceRegions
+            backupRegions
+            preferredRegion
+            regions {
+              code
+              minCount
+              weight
+            }
+          }
           releases(last: 5) {
             totalCount
             nodes {

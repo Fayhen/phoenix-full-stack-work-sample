@@ -40,34 +40,6 @@
             </span>
           </div>
         </div>
-
-        <%# <div class="border-b border-l border-r mt-2 pb-2">
-          <div class="grid grid-cols-1 items-center text-sm font-medium text-gray-800 h-8 bg-gray-50">
-            Detailed ports
-          </div>
-          <div class="grid grid-cols-2 items-center">
-            <div class="text-sm font-medium text-gray-800">
-              Port
-            </div>
-            <div class="text-sm font-medium text-gray-800">
-              Handlers
-            </div>
-
-            <%= for port <- service["ports"] do %>
-              <%# <div>
-                <%= port["port"] %>
-              <%# </div>
-
-              <div class="flex justify-center">
-                <%= for handler <- port["handlers"] do %>
-                  <%# <span class="px-2 mx-2 inline-flex text-xs leading-5 font-semibold align-middle rounded-full bg-gray-100">
-                    <%= handler %>
-                  <%# </span>
-                <% end %>
-              <%# </div>
-            <% end %>
-          <%# </div>
-        </div> %>
       <% end %>
 
   </div>

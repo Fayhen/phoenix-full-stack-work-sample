@@ -7,12 +7,12 @@
     <%= for pg <- @process_groups do %>
       <div class="border-4 border-light-blue-500 border-opacity-25 rounded-md hover:border-opacity-50 mb-4">
         <div class="h-12 flex items-center text-gray-900 px-2">
-          <p>Name: <span class="font-semibold ml-4"><%= pg["name"] %></span></p>
+          <p>Process name: <span class="font-semibold ml-4"><%= pg["name"] %></span></p>
         </div>
 
         <div class="border-t px-2 mb-2">
           <h3 class="text-gray-900 my-2">
-            Hardware usage:
+            Hardware use:
           </h3>
 
           <table class="divide-y divide-gray-200 w-full">
