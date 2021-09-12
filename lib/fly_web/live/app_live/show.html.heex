@@ -93,7 +93,7 @@
 
         <!-- Overview wrapper -->
         <div class="lg:col-start-1 lg:col-span-2 bg-white shadow-md rounded-lg">
-          <%= live_component(FlyWeb.AppLive.GeneralInfo, id: :general, current_release: @app["currentRelease"], vm_size: @app["vmSize"],  show_hardware: @show_hardware ) %>
+          <%= live_component(FlyWeb.AppLive.Overview, id: :general, current_release: @app["currentRelease"], vm_size: @app["vmSize"],  show_hardware: @show_hardware ) %>
         </div>
 
         <!-- Services wrapper -->

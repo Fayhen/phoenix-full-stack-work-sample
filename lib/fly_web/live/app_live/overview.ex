@@ -1,4 +1,4 @@
-defmodule FlyWeb.AppLive.GeneralInfo do
+defmodule FlyWeb.AppLive.Overview do
   use FlyWeb, :live_component
 
   def mount(%{"name" => _name}, session, socket) do

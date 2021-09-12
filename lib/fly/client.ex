@@ -241,6 +241,8 @@ defmodule Fly.Client do
             balanceRegions
             backupRegions
             preferredRegion
+            maxCount
+            minCount
             regions {
               code
               minCount
