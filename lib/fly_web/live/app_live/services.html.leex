@@ -1,11 +1,11 @@
 <section aria-labelledby="services-title">
-  <div class="px-4 pt-5 sm:px-6">
+  <div class="px-4 pt-5 sm:px-6 overflow-x-auto">
     <h2 id="services-title" class="text-lg leading-6 font-medium text-gray-900">
       Services
     </h2>
 
     <div class="my-4 px-4 sm:px-6 text-center">
-      <div class="grid grid-cols-4 items-center font-medium text-gray-800">
+      <div class="font-medium text-gray-800 grid grid-cols-4 items-center">
         <div class="text-sm">
           Description
         </div>
@@ -21,7 +21,7 @@
       </div>
 
       <%= for service <- @services do %>
-        <div class="grid grid-cols-4 items-center">
+        <div class="my-2 grid grid-cols-4 items-center justify-center">
           <div class="text-sm">
             <%= service["description"] %>
           </div>
@@ -32,15 +32,14 @@
             <%= service["protocol"] %>
           </div>
           <div class="flex justify-center">
-            <span class="px-2 mx-1 inline-flex text-xs leading-5 font-semibold align-middle rounded-full bg-green-100">
+            <span class="px-2 mx-2 text-xs leading-5 font-semibold align-middle inline-flex bg-green-100 rounded-full">
               <%= service["softConcurrency"] %>
             </span>
-            <span class="px-2 mx-1 inline-flex text-xs leading-5 font-semibold align-middle rounded-full bg-red-100">
+            <span class="px-2 mx-2 text-xs leading-5 font-semibold align-middle inline-flex bg-red-100 rounded-full">
               <%= service["hardConcurrency"] %>
             </span>
           </div>
         </div>
       <% end %>
-
   </div>
 </section>

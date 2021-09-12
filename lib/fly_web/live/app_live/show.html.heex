@@ -1,10 +1,10 @@
-<div>
-  <div class="bg-gray-800 pb-32">
+<div class="bg-gray-50">
+  <div class="pb-32 bg-gray-800">
 
     <nav class="bg-gray-800">
-      <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+      <div class="mx-auto sm:px-6 lg:px-8 max-w-7xl">
         <div class="border-b border-gray-700">
-          <div class="flex items-center justify-between h-16 px-4 sm:px-0">
+          <div class="px-4 sm:px-0 h-16 flex items-center justify-between">
             <div class="flex items-center">
               <div class="flex-shrink-0">
                 <img class="h-8 w-8" src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg" alt="Workflow">
@@ -18,7 +18,7 @@
                 </div>
               </div>
             </div>
-            <div class="hidden md:flex items-center justify-end md:flex-1 lg:w-0">
+            <div class="md:flex md:flex-1 lg:w-0 hidden items-center justify-end">
               <%= link to: Routes.delete_session_path(@socket, :delete), method: :delete,
                 class: "whitespace-nowrap text-base font-medium text-gray-500 hover:text-gray-700" do %>
                 Sign Out
@@ -30,28 +30,30 @@
     </nav>
 
     <header class="py-10">
-      <div class="max-w-3xl mx-auto px-4 sm:px-6 flex flex-nowrap md:items-center md:justify-between md:space-x-5 lg:max-w-7xl lg:px-8">
+      <div class="mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl lg:max-w-7xl flex flex-nowrap md:items-center md:justify-between md:space-x-5">
         <div class="flex-1 min-w-0">
           
           <!-- App name -->
-          <h2 class="text-2xl font-bold leading-7 text-white-900 sm:text-3xl sm:truncate">
+          <h2 class="text-2xl font-bold leading-7 text-white-900 sm:text-3xl sm:truncate flex flex-wrap lg:flex-nowrap">
             <%= @app_name %>
 
             <%= if @app do %>
-              <!-- App version -->
-              <p class={"px-2 ml-4 inline-flex text-xs leading-5 font-semibold align-middle rounded-full #{status_bg_color(@app)} #{status_text_color(@app)}"}>
-                v<%= @app["version"] %>
-              </p>
+              <div>
+                <!-- App version -->
+                <p class={"px-2 ml-4 inline-flex text-xs leading-5 font-semibold align-middle rounded-full #{status_bg_color(@app)} #{status_text_color(@app)}"}>
+                  v<%= @app["version"] %>
+                </p>
 
-              <!-- Deployment status -->
-              <p class={"px-2 mx-4 inline-flex text-xs leading-5 font-semibold align-middle rounded-full #{status_bg_color(@app)} #{status_text_color(@app)}"}>
-                <%= @app["status"] %>
-              </p>
+                <!-- Deployment status -->
+                <p class={"px-2 mx-4 inline-flex text-xs leading-5 font-semibold align-middle rounded-full #{status_bg_color(@app)} #{status_text_color(@app)}"}>
+                  <%= @app["status"] %>
+                </p>
+              </div>
             <% end %>
           </h2>
 
           <!-- App's organization -->
-          <div class="mt-1 flex flex-col sm:flex-row sm:flex-wrap sm:mt-0 sm:space-x-6">
+          <div class="mt-1 sm:mt-0 flex flex-col sm:flex-row sm:flex-wrap sm:space-x-6">
             <div class="mt-2 flex items-center text-sm text-gray-500">
               <%= @app["organization"]["slug"] %>
             </div>
@@ -64,10 +66,10 @@
         </div>
 
         <!-- View button -->
-        <div class="flex mb-auto lg:ml-4">
+        <div class="mb-auto lg:ml-4 flex">
           <%= if @app["deployed"] == true do %>
-            <span class="block ml-3">
-              <%= link to: preview_url(@app), target: "_blank", class: "inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
+            <span class="ml-3 block">
+              <%= link to: preview_url(@app), target: "_blank", class: "px-4 py-2 text-sm font-medium text-gray-700 inline-flex items-center bg-white hover:bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" do %>
                 <!-- Heroicon name: solid/link -->
                 <svg class="-ml-1 mr-2 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                   <path fill-rule="evenodd" d="M12.586 4.586a2 2 0 112.828 2.828l-3 3a2 2 0 01-2.828 0 1 1 0 00-1.414 1.414 4 4 0 005.656 0l3-3a4 4 0 00-5.656-5.656l-1.5 1.5a1 1 0 101.414 1.414l1.5-1.5zm-5 5a2 2 0 012.828 0 1 1 0 101.414-1.414 4 4 0 00-5.656 0l-3 3a4 4 0 105.656 5.656l1.5-1.5a1 1 0 10-1.414-1.414l-1.5 1.5a2 2 0 11-2.828-2.828l3-3z" clip-rule="evenodd" />
@@ -84,43 +86,43 @@
   </div>
 
   <%= if @app do %>
-    <main class="-mt-32">
+    <main class="-mt-32 px-2 pb-12 flex flex-1">
 
       <!-- Outer wrapper -->
-      <div class="max-w-3xl mx-auto grid grid-cols-1 gap-6 sm:px-6 lg:max-w-7xl lg:grid-flow-col-dense lg:grid-cols-3">
+      <div class="mx-auto sm:px-6 max-w-3xl lg:max-w-7xl grid grid-cols-1 gap-6 lg:grid-flow-col-dense lg:grid-cols-3">
 
-        <!-- General info wrapper -->
-        <div class="bg-white shadow lg:col-start-1 lg:col-span-2 sm:rounded-lg">
+        <!-- Overview wrapper -->
+        <div class="lg:col-start-1 lg:col-span-2 bg-white shadow-md rounded-lg">
           <%= live_component(FlyWeb.AppLive.GeneralInfo, id: :general, current_release: @app["currentRelease"], vm_size: @app["vmSize"],  show_hardware: @show_hardware ) %>
         </div>
 
         <!-- Services wrapper -->
-        <div class="bg-white shadow lg:col-start-1 lg:col-span-2 sm:rounded-lg">
+        <div class="lg:col-start-1 lg:col-span-2 bg-white shadow-md rounded-lg">
           <%= live_component(FlyWeb.AppLive.Services, id: :services, services: @app["services"]) %>
         </div>
 
         <!-- Processes groups wrapper -->
-        <div class="bg-white shadow lg:col-start-1 lg:col-span-2 sm:rounded-lg">
+        <div class="lg:col-start-1 lg:col-span-2 bg-white shadow-md rounded-lg">
           <%= live_component(FlyWeb.AppLive.ProcessGroups, id: :process_groups, process_groups: @app["processGroups"]) %>  
         </div>
 
         <!-- Timeline wrapper -->
-        <div class="bg-white shadow lg:col-start-1 lg:col-span-2 sm:rounded-lg">
+        <div class="lg:col-start-1 lg:col-span-2 bg-white shadow-md rounded-lg">
           <%= live_component(FlyWeb.AppLive.Timeline, id: :timeline, releases: @app["releases"]["nodes"]) %>
         </div>
 
         <!-- Regions wrapper -->
-        <div class="bg-white shadow lg:col-start-3 lg:col-span-1 sm:rounded-lg">
+        <div class="lg:col-start-3 lg:col-span-1 bg-white shadow-md rounded-lg">
           <%= live_component(FlyWeb.AppLive.Regions, id: :regions, regions: @app["regions"], backup_regions: @app["backupRegions"], show_backup_regions: @show_backup_regions) %>
         </div>
 
         <!-- IP adresses wrapper -->
-        <div class="bg-white shadow lg:col-start-3 lg:col-span-1 sm:rounded-lg">
+        <div class="lg:col-start-3 lg:col-span-1 bg-white shadow-md rounded-lg">
           <%= live_component(FlyWeb.AppLive.IpAdresses, id: :ips, ip_addresses: @app["ipAddresses"]["nodes"]) %>
         </div>
 
         <!-- Autoscaling wrapper -->
-        <div class="bg-white shadow lg:col-start-3 lg:col-span-1 sm:rounded-lg">
+        <div class="lg:col-start-3 lg:col-span-1 bg-white shadow-md rounded-lg">
           <%= live_component(FlyWeb.AppLive.Autoscaling, id: :autoscaling, autoscaling: @app["autoscaling"], show_region_scaling: @show_region_scaling) %>
         </div>
         

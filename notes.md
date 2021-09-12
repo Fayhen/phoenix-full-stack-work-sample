@@ -13,3 +13,6 @@ A few utility variables were assigned to the Socket in `FlyWeb.AppLive.Show` for
 A utility function to parse datetime strings on the `ISO 8601` format to the conventional `Month-Day-Year Hour:Minute` form was added to `Fly.Utils`. This function is used to parse dates in different templates, but perhaps a better, future approach would be to integrate date format parsing with internationalization libraries.
 
 Upon compartmentalizing UI elements into live components, a single source of truth centralized in the parent LiveView was preferred. As such, a few booleans were assigned to its socket state. These booleans are toggled by handling events in the child components, then sending updated data values to `handle_info` functions in the parent.
+
+<!-- CSS classes organization:
+  [margin, padding, height, width] [typography] [position, display, flex/grid, spacing] [background] [borders, shadow] [cursor] -->

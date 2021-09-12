@@ -1,16 +1,18 @@
-<section aria-labelledby="ip-adresses-title">
+<section aria-labelledby="ip-addresses-title">
   <div class="px-4 py-5 sm:px-6">
-    <h2 id="ip-adresses-title" class="text-lg leading-6 font-medium text-gray-900">
-      IP Adresses
+    <h2 id="ip-addresses-title" class="text-lg leading-6 font-medium text-gray-900">
+      IP Addresses
     </h2>
 
-    <ul role="list" class="mt-3">
+    <ul role="list" class="mt-3 overflow-x-auto">
       <%= for ip <- @ip_addresses do %>
-        <li class="hover:shadow hover:bg-gray-50 p-4 rounded-md">
-          <span class="px-2 mr-4 inline-flex text-xs leading-5 font-semibold align-middle rounded-full bg-gray-100">
+        <li class="p-4 text-gray-800 flex justify-between hover:bg-gray-50 rounded-md">
+          <span class="px-3 mx-4 text-xs leading-7 font-semibold align-middle whitespace-nowrap inline-flex bg-green-100 rounded-full">
               IP<%= ip["type"] %>
           </span>
-          <%= ip["address"] %>
+          <span>
+            <%= ip["address"] %>
+          </span>
         </li>
       <% end %>
     </ul>

@@ -1,11 +1,11 @@
 <section aria-labelledby="general-info-title">
   <div class="px-4 pt-5 sm:px-6">
     <h2 id="general-info-title" class="text-lg leading-6 font-medium text-gray-900">
-      General
+      Overview
     </h2>
 
-    <div class="space-y-6 my-4 px-4 sm:px-6">
-      <div class="grid grid-cols-3 text-gray-900">
+    <div class="my-4 px-4 sm:px-6 space-y-6 text-center">
+      <div class="text-gray-800 grid grid-cols-3">
         <div>
           Current version
         </div>
@@ -22,7 +22,7 @@
             v<%= @current_release["version"] %>
           </p>
         </div>
-        <div class="flex flex-row items-center">
+        <div class="flex justify-center items-center">
           <%= if @current_release["stable"] do %>
             <p class="text-green-800">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -36,7 +36,7 @@
               </svg>
             </p>
           <% end %>
-          <p>
+          <p class="ml-2">
             <%= @current_release["status"] %>
           </p>
         </div>
@@ -49,14 +49,14 @@
     </div>
 
     <!-- Hardware usage details -->
-    <div class="flex flex-row justify-between items-center bg-gray-50 hover:bg-gray-100 text-gray-900 cursor-pointer rounded-lg h-10 my-4 px-4 sm:px-6" phx-click="toggle_show_hardware" phx-target="<%= @myself %>">
+    <div class="my-4 px-4 sm:px-6 h-10 text-gray-800 flex flex-row justify-between items-center bg-gray-50 hover:bg-gray-100 hover:shadow rounded-lg cursor-pointer" phx-click="toggle_show_hardware" phx-target="<%= @myself %>">
       <h3>Resources used</h3>
       <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
         <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
       </svg>
     </div>
-    <div class="<%= @show_hardware %> space-y-6 mt-4 pb-4 px-4 sm:px-6">
-      <div class="grid grid-cols-5 text-gray-900">
+    <div class="<%= @show_hardware %> mt-4 pb-4 px-4 sm:px-6 text-center space-y-6">
+      <div class="font-medium text-sm text-gray-800 grid grid-cols-5">
         <div>
           Name
         </div>

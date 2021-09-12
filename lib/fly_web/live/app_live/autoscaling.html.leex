@@ -1,15 +1,15 @@
-<section aria-labelledby="services-title">
+<section aria-labelledby="autoscaling-title">
   <div class="px-4 py-5 sm:px-6">
-    <h2 id="services-title" class="text-lg leading-6 font-medium text-gray-900">
+    <h2 id="autoscaling-title" class="text-lg leading-6 font-medium text-gray-900">
       Autoscaling
     </h2>
 
-    <%= if @autoscaling["enabled"] do %>
-      <div class="my-2 px-2 h-12 text-gray-800 flex items-center bg-green-50 hover:bg-green-100 hover:shadow rounded-md">
-        <p>Status: <span class="ml-4 font-semibold">enabled</span></p>
+    <%= if @autoscaling["enabled"] == true do %>
+      <div class="my-2 px-2 h-12 font-semibold text-gray-800 flex items-center bg-green-50 hover:bg-green-100 hover:shadow rounded-md">
+        <p>Status: <span class="ml-4 font-normal">enabled</span></p>
       </div>
 
-      <div class="px-2 text-gray-800 grid grid-cols-4 gap-y-1">
+      <div class="px-2 text-gray-800 grid grid-cols-4 gap-y-3">
         <div class="col-span-2">
           Strategy:
         </div>
@@ -21,13 +21,13 @@
         </div>
         <%= if @autoscaling["balanceRegions"] == true do %>
           <div class="font-medium col-span-2">
-            <span class="px-2 inline-flex col-span-2 text-xs leading-5 font-semibold align-middle rounded-full bg-green-100">
+            <span class="px-2 inline-flex col-span-2 text-xs leading-6 font-semibold align-middle bg-green-100 rounded-full">
               enabled
             </span>
           </div>
         <% else %>
           <div class="font-medium col-span-2">
-            <span class="px-2 inline-flex col-span-2 text-xs leading-5 font-semibold align-middle rounded-full bg-gray-100">
+            <span class="px-2 inline-flex col-span-2 text-xs leading-6 font-semibold align-middle bg-gray-100 rounded-full">
               disabled
             </span>
           </div>
@@ -36,13 +36,13 @@
           Preferred region:
         </div>
         <div class="font-medium col-span-2">
-          <span class="px-2 inline-flex col-span-2 text-xs leading-5 font-semibold align-middle rounded-full bg-gray-100">
+          <span class="px-3 inline-flex col-span-2 text-xs leading-6 font-semibold align-middle bg-gray-100 rounded-full">
             <%= @autoscaling["preferredRegion"] %>
           </span>
         </div>
       </div>
 
-      <div class="my-4 px-4 sm:px-6 h-10 text-gray-800 flex flex-row justify-between items-center bg-gray-50 hover:bg-gray-100 rounded-lg cursor-pointer" phx-click="toggle_show_region_scaling" phx-target="<%= @myself %>">
+      <div class="my-4 px-4 sm:px-6 h-10 text-gray-800 flex flex-row justify-between items-center bg-gray-50 hover:bg-gray-100 hover:shadow rounded-lg cursor-pointer" phx-click="toggle_show_region_scaling" phx-target="<%= @myself %>">
       <h3>Details by region</h3>
       <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
         <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
@@ -61,7 +61,7 @@
       </div>
       <%= for region <- @autoscaling["regions"] do %>
         <div>
-          <span class="px-2 inline-flex col-span-2 text-xs leading-5 font-semibold align-middle rounded-full bg-gray-100">
+          <span class="px-3 inline-flex col-span-2 text-xs leading-6 font-semibold align-middle bg-gray-100 rounded-full">
             <%= region["code"] %>
           </span>
         </div>
@@ -74,8 +74,8 @@
       <% end %>
     </div>
     <% else %>
-      <div class="my-2 px-2 h-12 text-gray-800 flex items-center bg-gray-50 hover:bg-gray-100 hover:shadow rounded-md">
-        <p>Status: <span class="font-semibold ml-4">disabled</span></p>
+      <div class="my-2 px-2 h-12 font-semibold text-gray-800 flex items-center bg-gray-50 hover:bg-gray-100 rounded-md">
+        <p>Status: <span class="ml-4 font-normal">disabled</span></p>
       </div>
       <p class="px-4 italic">Autoscaling is not activated for this application.</p>
     <% end %>
