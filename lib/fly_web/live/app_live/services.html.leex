@@ -4,20 +4,12 @@
       Services
     </h2>
 
-    <div class="my-4 px-4 sm:px-6 text-center">
-      <div class="font-medium text-gray-800 grid grid-cols-4 items-center">
-        <div class="text-sm">
-          Description
-        </div>
-        <div class="text-sm">
-          Internal port
-        </div>
-        <div class="text-sm">
-          Protocol
-        </div>
-        <div class="text-sm">
-          Concurrency (soft/hard)
-        </div>
+    <div class="my-4 px-4 sm:px-6 text-center text-gray-800">
+      <div class="font-medium text-sm sm:text-base grid grid-cols-4 items-center">
+        <div>Description</div>
+        <div>Internal port</div>
+        <div>Protocol</div>
+        <div>Concurrency (soft/hard)</div>
       </div>
 
       <%= for service <- @services do %>

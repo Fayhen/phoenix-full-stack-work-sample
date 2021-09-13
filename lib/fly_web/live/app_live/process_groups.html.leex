@@ -5,54 +5,49 @@
     </h2>
 
     <%= for pg <- @process_groups do %>
-      <div class="mb-4 border-4 border-light-blue-500 border-opacity-25 hover:border-opacity-50 rounded-md">
+      <div class="pb-4 border-4 border-light-blue-500 border-opacity-25 hover:border-opacity-50 rounded-md">
         <div class="px-2 h-12 font-semibold text-gray-800 flex items-center">
-          <p>Process name: <span class="font-normal ml-4"><%= pg["name"] %></span></p>
+          <span>Process name: <span class="font-normal ml-4"><%= pg["name"] %></span></span>
         </div>
 
-        <div class="px-2 mb-2 border-t overflow-x-auto">
-          <h3 class="my-2 text-gray-800">
-            Hardware use:
-          </h3>
-
-          <table class="w-full divide-y divide-gray-200">
-            <thead class="bg-gray-50">
-              <tr>
-                <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Name
-                </th>
-                <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  CPU cores
-                </th>
-                <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Memory use (MB)
-                </th>
-                <th scope="col" class="px-3 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                  Price (month)
-                </th>
-              </tr>
-            </thead>
-            <tbody class="bg-white divide-y divide-gray-200">
-              <tr>
-                <td class="px-3 py-4 whitespace-nowrap text-sm text-gray-500">
-                  <%= pg["vmSize"]["name"] %>
-                </td>
-                <td class="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
-                  <%= pg["vmSize"]["cpuCores"] %>
-                </td>
-                <td class="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
-                  <%= pg["vmSize"]["memoryMb"] %>
-                </td>
-                <td class="px-3 py-4 whitespace-nowrap text-sm font-medium text-gray-800">
-                  US$ <%= pg["vmSize"]["priceMonth"] %>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="px-2 h-12 border-t font-semibold text-gray-800 flex items-center">
+          <span>Hardware use:</span>
         </div>
 
-        <%= if length(pg["regions"]) > 0 do %>
-          <div class="px-2 border-t border-b">
+        <div class="text-center text-gray-800 grid grid-cols-2 gap-y-4">
+
+          <div class="ml-4 text-center sm:text-left font-medium">
+              VM Size
+          </div>
+          <div>
+            <%= pg["vmSize"]["name"] %>
+          </div>
+
+          <div class="ml-4 text-center sm:text-left font-medium">
+              CPU Cores
+          </div>
+          <div>
+            <%= pg["vmSize"]["cpuCores"] %>
+          </div>
+
+          <div class="ml-4 text-center sm:text-left font-medium">
+              Memory (MB)
+          </div>
+          <div>
+            <%= pg["vmSize"]["memoryMb"] %>
+          </div>
+
+          <div class="ml-4 text-center sm:text-left font-medium">
+              Pricing (month)
+          </div>
+          <div>
+            US$ <%= pg["vmSize"]["priceMonth"] %>
+          </div>
+        </div>
+      </div>
+
+      <%= if length(pg["regions"]) > 0 do %>
+          <div class="px-2 border-t">
             <h3 class="my-2 text-gray-800">
               Deployed regions:
             </h3>
@@ -63,7 +58,6 @@
             <% end %>
           </div>
         <% end %>
-      </div>
     <% end %>
   </div>
 </section>

@@ -5,54 +5,58 @@
     </h2>
 
     <%= if @autoscaling["enabled"] == true do %>
-      <div class="my-2 px-2 h-12 font-semibold text-gray-800 flex items-center bg-green-50 hover:bg-green-100 hover:shadow rounded-md">
+      <div class="my-2 px-2 h-12 font-semibold text-gray-800 flex items-center bg-green-100 rounded-md">
         <p>Status: <span class="ml-4 font-normal">enabled</span></p>
       </div>
 
-      <div class="px-2 text-gray-800 grid grid-cols-4 items-center gap-y-3">
-        <div class="col-span-2">
-          Strategy:
+      <div class="px-2 text-gray-800 grid grid-cols-2 items-center gap-y-3">
+        <div class="ml-4 font-medium">
+          Strategy
         </div>
-        <span class="text-base text-center col-span-2">
+        <span class="text-base text-center">
           <%= describe_scaling_strategy(@autoscaling["strategy"]) %>
         </span>
-        <div class="col-span-2">
-          Balance regions:
+
+        <div class="ml-4 font-medium">
+          Balance regions
         </div>
         <%= if @autoscaling["balanceRegions"] == true do %>
-          <div class="font-medium text-center col-span-2">
-            <span class="px-2 inline-flex col-span-2 text-xs leading-6 font-semibold align-middle bg-green-100 rounded-full">
+          <div class="font-medium text-center">
+            <span class="px-2 inline-flex leading-6 align-middle bg-green-100 rounded-full">
               enabled
             </span>
           </div>
         <% else %>
-          <div class="font-medium text-center col-span-2">
-            <span class="px-2 inline-flex col-span-2 text-xs leading-6 font-semibold align-middle bg-gray-100 rounded-full">
+          <div class="font-medium text-center">
+            <span class="px-2 inline-flex leading-6 align-middle bg-gray-100 rounded-full">
               disabled
             </span>
           </div>
         <% end %>
-        <div class="col-span-2">
-          Preferred region:
+
+        <div class="ml-4 font-medium">
+          Preferred region
         </div>
-        <div class="font-medium text-center col-span-2">
-          <span class="px-3 inline-flex col-span-2 text-xs leading-6 font-semibold align-middle bg-gray-100 rounded-full">
+        <div class="text-center">
+          <span>
             <%= @autoscaling["preferredRegion"] %>
           </span>
         </div>
-        <div class="col-span-2">
-          Minimum number of instances:
+
+        <div class="ml-4 font-medium">
+          Minimum number of instances
         </div>
-        <div class="font-medium text-center col-span-2">
-          <span class="px-3 inline-flex col-span-2 text-xs leading-6 font-semibold align-middle bg-gray-100 rounded-full">
+        <div class="text-center">
+          <span>
             <%= @autoscaling["minCount"] %>
           </span>
         </div>
-        <div class="col-span-2">
-          Maximum number of instances:
+
+        <div class="ml-4 font-medium">
+          Maximum number of instances
         </div>
-        <div class="font-medium text-center col-span-2">
-          <span class="px-3 inline-flex col-span-2 text-xs leading-6 font-semibold align-middle bg-gray-100 rounded-full">
+        <div class="text-center">
+          <span>
             <%= @autoscaling["maxCount"] %>
           </span>
         </div>
@@ -60,37 +64,31 @@
 
       <div class="my-4 px-4 sm:px-6 h-10 font-medium text-gray-800 flex flex-row justify-between items-center bg-gray-50 hover:bg-gray-100 hover:shadow rounded-lg cursor-pointer" phx-click="toggle_show_region_scaling" phx-target="<%= @myself %>">
       <h3>Details by region</h3>
-      <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-        <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-      </svg>
-    </div>
+        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+          <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+        </svg>
+      </div>
 
-    <div class="<%= @show_region_scaling %>">
-      <div class="font-medium text-sm text-gray-800">
-        Region
+      <div class="<%= @show_region_scaling %> font-medium text-sm sm:text-base text-gray-800">
+        <div>Region</div>
+        <div>Minimum number of instances</div>
+        <div>Weight</div>
+
+        <%= for region <- @autoscaling["regions"] do %>
+          <div class="font-normal">
+            <span><%= region["code"] %></span>
+          </div>
+          <div class="font-normal">
+            <span><%= region["minCount"] %></span>
+          </div>
+          <div class="font-normal">
+            <span><%= region["weight"] %></span>
+          </div>
+        <% end %>
       </div>
-      <div class="font-medium text-sm text-gray-800">
-        Minimum number of instances
-      </div>
-      <div class="font-medium text-sm text-gray-800">
-        Weight
-      </div>
-      <%= for region <- @autoscaling["regions"] do %>
-        <div>
-          <span class="px-3 inline-flex col-span-2 text-xs leading-6 font-semibold align-middle bg-gray-100 rounded-full">
-            <%= region["code"] %>
-          </span>
-        </div>
-        <div>
-          <span><%= region["minCount"] %></span>
-        </div>
-        <div>
-          <span><%= region["weight"] %></span>
-        </div>
-      <% end %>
-    </div>
+
     <% else %>
-      <div class="my-2 px-2 h-12 font-semibold text-gray-800 flex items-center bg-gray-50 hover:bg-gray-100 rounded-md">
+      <div class="my-2 px-2 h-12 font-semibold text-gray-800 flex items-center bg-gray-100 rounded-md">
         <p>Status: <span class="ml-4 font-normal">disabled</span></p>
       </div>
       <p class="px-4 italic">Autoscaling is inactive for this application.</p>

@@ -15,6 +15,7 @@ defmodule FlyWeb.AppLive.Show do
         app_name: name,
         count: 0,
         authenticated: true,
+        render_components: "overview",
         show_hardware: "hidden",
         show_backup_regions: "hidden",
         show_region_scaling: "hidden"
@@ -46,6 +47,28 @@ defmodule FlyWeb.AppLive.Show do
         Logger.error("Failed to load app '#{inspect(app_name)}'. Reason: #{inspect(reason)}")
 
         put_flash(socket, :error, reason)
+    end
+  end
+
+  @impl true
+  def handle_event("render_components", component_group, socket) do
+    group = component_group["group"]
+    cond do
+      group == "overview" ->
+        Logger.info("Toggled 'overview'")
+        {:noreply, assign(socket, render_components: "overview")}
+      group == "autoscaling" ->
+        Logger.info("Toggled 'autoscaling'")
+        {:noreply, assign(socket, render_components: "autoscaling")}
+      group == "processes" ->
+        Logger.info("Toggled 'processes'")
+        {:noreply, assign(socket, render_components: "processes")}
+      group == "timeline" ->
+        Logger.info("Toggled 'timeline'")
+        {:noreply, assign(socket, render_components: "timeline")}
+      true ->
+        Logger.info("Fallbacking to 'overview'")
+        {:noreply, assign(socket, render_components: "overview")}
     end
   end
 

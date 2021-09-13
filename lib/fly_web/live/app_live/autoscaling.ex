@@ -22,7 +22,7 @@ defmodule FlyWeb.AppLive.Autoscaling do
   @impl true
   def handle_event("toggle_show_region_scaling", _params, socket) do
     updated = if socket.assigns.show_region_scaling == "hidden" do
-      "grid grid-cols-3 gap-y-1 text-center"
+      "grid grid-cols-3 gap-y-3 text-center"
     else
       "hidden"
     end
