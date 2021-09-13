@@ -5,8 +5,8 @@
     </h2>
 
     <%= for pg <- @process_groups do %>
-      <div class="pb-4 border-4 border-light-blue-500 border-opacity-25 hover:border-opacity-50 rounded-md">
-        <div class="px-2 h-12 font-semibold text-gray-800 flex items-center">
+      <div class="pb-4 border-4 border-light-blue-500 border-opacity-25 hover:border-opacity-50 bg-gray-100 rounded-md">
+        <div class="px-2 h-12 font-semibold text-gray-800 flex items-center bg-white">
           <span>Process name: <span class="font-normal ml-4"><%= pg["name"] %></span></span>
         </div>
 

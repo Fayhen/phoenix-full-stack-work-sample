@@ -3,6 +3,7 @@ defmodule FlyWeb.AppLive.Show do
   require Logger
 
   alias Fly.Client
+  alias FlyWeb.Components.AppDetailNavigation
   alias FlyWeb.Components.HeaderBreadcrumbs
 
   @impl true
