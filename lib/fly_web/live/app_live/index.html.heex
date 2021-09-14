@@ -66,7 +66,9 @@
                       <div class="mt-2 flex items-center text-sm text-gray-500 sm:mt-0">
                         <p>
                           Last deploy on
-                          <time datetime={app["currentRelease"]["createdAt"]}><%= app["currentRelease"]["createdAt"] %></time>
+                          <time datetime={app["currentRelease"]["createdAt"]}>
+                            <%= Fly.Utils.readable_date(app["currentRelease"]["createdAt"]) %>
+                          </time>
                         </p>
                       </div>
                     </div>
