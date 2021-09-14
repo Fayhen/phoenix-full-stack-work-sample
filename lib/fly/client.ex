@@ -249,7 +249,7 @@ defmodule Fly.Client do
               weight
             }
           }
-          releases(last: 5) {
+          releases(first: 5) {
             totalCount
             nodes {
               version

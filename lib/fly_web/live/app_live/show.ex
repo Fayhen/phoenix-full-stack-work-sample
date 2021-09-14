@@ -56,19 +56,14 @@ defmodule FlyWeb.AppLive.Show do
     group = component_group["group"]
     cond do
       group == "overview" ->
-        Logger.info("Toggled 'overview'")
         {:noreply, assign(socket, render_components: "overview")}
       group == "autoscaling" ->
-        Logger.info("Toggled 'autoscaling'")
         {:noreply, assign(socket, render_components: "autoscaling")}
       group == "processes" ->
-        Logger.info("Toggled 'processes'")
         {:noreply, assign(socket, render_components: "processes")}
       group == "timeline" ->
-        Logger.info("Toggled 'timeline'")
         {:noreply, assign(socket, render_components: "timeline")}
       true ->
-        Logger.info("Fallbacking to 'overview'")
         {:noreply, assign(socket, render_components: "overview")}
     end
   end

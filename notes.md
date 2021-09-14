@@ -27,6 +27,7 @@ Besides full administrational capabilities as detailed in the section above, bel
 - Router integration for the different app information tabs. The current version works through simple toggling of CSS classes. Nested routes with dedicated queries can reduce server overload by requesting less, more scoped data at a time, as well as proving proper programmatic navigation.
 - Expanding the variety of retrieved app data, nesting it accordingly in new, dedicated components and tabs. Examples are certificates, app usage, logs, configuration, Postgres clusters and other fields available on the API.
 - The datetime string parsing can be improved through integration with internationalization libraries, with resulting strings displaying local formats.
+- Dynamic loading of the the release history, fetching 5 (or a configurable amount) releases at a time, newest to oldest.
 
 ### Closing notes
 
