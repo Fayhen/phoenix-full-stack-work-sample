@@ -67,7 +67,7 @@
                         <p>
                           Last deploy on
                           <time datetime={app["currentRelease"]["createdAt"]}>
-                            <%= Fly.Utils.readable_date(app["currentRelease"]["createdAt"]) %>
+                            <%= Fly.Utils.get_readable_date(app["currentRelease"]["createdAt"]) %>
                           </time>
                         </p>
                       </div>
